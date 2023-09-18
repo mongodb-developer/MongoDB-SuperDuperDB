@@ -505,5 +505,5 @@ cur = db.execute(
 for r in cur:
     print(r['title'])
 ```
-[Super Duper DB](https://www.superduperdb.com/)
+[SuperDuperDB](https://www.superduperdb.com/)
 
