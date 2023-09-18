@@ -464,8 +464,9 @@ print(db.show('vector_index'))
 ```
 You'll see now, that as data are added to the database, the model springs into action, vectorizing these documents, and adding the vectors back to the original documents:
 
-
+```
 from superduperdb.container.document import Document
+```
 
 ```
 data = [Document(r) for r in data]
@@ -479,6 +480,13 @@ We can verify that the vectors are in the documents:
 
 ```
 db.execute(collection.find_one())
+```
+
+Output should be something like this
+
+```
+>>> db.execute(collection.find_one())
+Document({'_id': ObjectId('6508a3bca23208b4b944ddfe'), 'title': 'Anarchism', 'abstract': 'Anarchism is a political philosophy and movement that is skeptical of all justifications for authority and seeks to abolish the institutions they claim maintain unnecessary coercion and hierarchy, typically including, though not necessarily limited to, the state and capitalism. Anarchism advocates for the replacement of the state with stateless societies or other forms of free associations.
 ```
 
 Now we can use the vector-index to search via meaning through the wikipedia abstracts:
