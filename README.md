@@ -1,10 +1,11 @@
-In this tutorial we'll implement vector-search in SuperDuperDB using OpenAI vector-embeddings. For this you'll need an OPENAI_API_KEY, which you can obtain on openai's website. You'll then set this as an environment variable:
+In this demo we'll implement vector-search in SuperDuperDB using OpenAI vector-embeddings. For this you'll need an OPENAI_API_KEY, which you can obtain on openai's website. You'll then set this as an environment variable:
 
 import os
 
 # Get one here https://openai.com/blog/openai-api
 os.environ['OPENAI_API_KEY'] = '<YOUR-API-KEY>'
 
+```
 import pymongo
 
 from superduperdb.ext.openai.model import OpenAIEmbedding
@@ -12,16 +13,19 @@ from superduperdb.db.mongodb.query import Collection
 from superduperdb import superduper
 from superduperdb.container.listener import Listener
 from superduperdb.container.vector_index import VectorIndex
+```
 
 In order to access SuperDuperDB, we use the Datalayer class. This is obtained by simply wrapping your MongoDB database connection, using pymongo. We'll be adding data and activating models on the wikipedia collection:
 
+```
 db = pymongo.MongoClient().documents
 db = superduper(db)
-
 collection = Collection(name='wikipedia')
+```
 
 We'll use a tiny excerpt out of wikipedia to test the functionality. Needless to say, since the Datalayer uses MongoDB and LanceDB, the vector-search solution may be taken to large scale without a problem:
 
+```
 data = [
   {
     "title": "Anarchism",
@@ -424,7 +428,7 @@ data = [
     "abstract": "Analysis is the process of breaking a complex topic or substance into smaller parts in order to gain a better understanding of it. The technique has been applied in the study of mathematics and logic since before Aristotle (384–322 B."
   }
 ]
-
+```
 
 Creating a vector-index in SuperDuperDB involves two things:
 
@@ -432,6 +436,7 @@ Creating a model which is used to compute vectors (in this case OpenAIEmbedding)
 Daemonizing this model on a key (Listener), so that when new data are added, these are vectorized using the key
 This may be done in multiple steps in or one command, as below:
 
+```
 db.add(
     VectorIndex(
         identifier='my-index',
@@ -442,28 +447,37 @@ db.add(
         ),
     )
 )
-
+```
 
 We can verify the components which have been activated in the database with db.show:
 
+```
 print(db.show('listener'))
 print(db.show('model'))
 print(db.show('vector_index'))
-
+```
 You'll see now, that as data are added to the database, the model springs into action, vectorizing these documents, and adding the vectors back to the original documents:
+
 
 from superduperdb.container.document import Document
 
+```
 data = [Document(r) for r in data]
+```
 
+```
 db.execute(collection.insert_many(data))
+```
 
 We can verify that the vectors are in the documents:
 
+```
 db.execute(collection.find_one())
+```
 
 Now we can use the vector-index to search via meaning through the wikipedia abstracts:
 
+```
 cur = db.execute(
     Collection(name='wikipedia')
         .like({'abstract': 'philosophers'}, n=10, vector_index='my-index')
@@ -472,8 +486,10 @@ cur = db.execute(
 for r in cur:
     print(r['title'])
 
+```
 The upside of using a standard database as the databackend, is that we can combine vector-search with standard filtering, to get a hybrid search:
 
+```
 cur = db.execute(
     Collection(name='wikipedia')
         .like({'abstract': 'philosophers'}, n=100, vector_index='my-index')
@@ -482,3 +498,4 @@ cur = db.execute(
 
 for r in cur:
     print(r['title'])
+```
