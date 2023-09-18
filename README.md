@@ -5,11 +5,10 @@ In this demo we'll implement vector-search in SuperDuperDB using OpenAI vector-e
 import os
 
 # Get one here https://openai.com/blog/openai-api
-os.environ['OPENAI_API_KEY'] = '<YOUR-API-KEY>'
 
 ```
+os.environ['OPENAI_API_KEY'] = '<YOUR-API-KEY>'
 import pymongo
-
 from superduperdb.ext.openai.model import OpenAIEmbedding
 from superduperdb.db.mongodb.query import Collection
 from superduperdb import superduper
