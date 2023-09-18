@@ -513,5 +513,3 @@ cur = db.execute(
 for r in cur:
     print(r['title'])
 ```
-[SuperDuperDB](https://www.superduperdb.com/)
-
