@@ -2,7 +2,7 @@
 
 In this demo we'll implement vector-search in SuperDuperDB using OpenAI vector-embeddings. For this you'll need an OPENAI_API_KEY, which you can obtain on openai's website. You'll then set this as an environment variable:
 
-# Get one here https://openai.com/blog/openai-api
+Get one here https://openai.com/blog/openai-api
 
 ```
 import os
