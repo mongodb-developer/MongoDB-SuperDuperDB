@@ -496,6 +496,20 @@ for r in cur:
     print(r['title'])
 
 ```
+Output should be 
+```
+Argument (disambiguation)
+Argument (disambiguation)
+Argument (disambiguation)
+Aristophanes
+Aristophanes
+Aristophanes
+Analysis
+Analysis
+Analysis
+Altruism
+```
+
 The upside of using a standard database as the databackend, is that we can combine vector-search with standard filtering, to get a hybrid search:
 
 ```
@@ -507,4 +521,12 @@ cur = db.execute(
 
 for r in cur:
     print(r['title'])
+```
+
+Output should be 
+
+```
+Applied ethics
+Applied ethics
+Applied ethics
 ```
