@@ -19,11 +19,6 @@ from superduperdb.db.mongodb.query import Collection
 from superduperdb import superduper
 from superduperdb.container.listener import Listener
 from superduperdb.container.vector_index import VectorIndex
-```
-
-In order to access SuperDuperDB, we use the Datalayer class. This is obtained by simply wrapping your MongoDB database connection, using pymongo. We'll be adding data and activating models on the wikipedia collection:
-
-```
 db = pymongo.MongoClient().documents
 db = superduper(db)
 collection = Collection(name='wikipedia')
