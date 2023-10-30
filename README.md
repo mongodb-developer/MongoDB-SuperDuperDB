@@ -1,4 +1,4 @@
-# ***OpenAI vector search*** 🔬 🔮 🧠
+# ***OpenAI vector search*** 🔬 🔮 🧠 🦜
 
 First of all the SuperDuperDB repo is here! https://github.com/SuperDuperDB/superduperdb
 
