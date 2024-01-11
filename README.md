@@ -500,11 +500,11 @@ for r in cur:
 ```
 Output should be 
 ```
-anarchist
-anarchist
-anarchist
-anarchist
-
+Anarchism
+Anarchism
+Anarchism
+Anarchism
+Anarchism
 ```
 
 The upside of using a standard database as the databackend, is that we can combine vector-search with standard filtering, to get a hybrid search:
