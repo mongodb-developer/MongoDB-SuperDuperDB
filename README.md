@@ -491,7 +491,7 @@ Now we can use the vector-index to search via meaning through the wikipedia abst
 ```
 cur = db.execute(
     Collection(name='wikipedia')
-        .like({'abstract': 'philosophers'}, n=10, vector_index='my-index')
+        .like({'abstract': 'anarchist'}, n=10, vector_index='my-index')
 )
 
 for r in cur:
@@ -500,16 +500,11 @@ for r in cur:
 ```
 Output should be 
 ```
-Argument (disambiguation)
-Argument (disambiguation)
-Argument (disambiguation)
-Aristophanes
-Aristophanes
-Aristophanes
-Analysis
-Analysis
-Analysis
-Altruism
+anarchist
+anarchist
+anarchist
+anarchist
+
 ```
 
 The upside of using a standard database as the databackend, is that we can combine vector-search with standard filtering, to get a hybrid search:
